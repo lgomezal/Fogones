@@ -1,8 +1,19 @@
 <resources>
-    <string name="app_name">Fogones</string>
+    <string name="app_name">Los Fogones</string>
     <string name="table_image_description">Imagen de la mesa</string>
     <string name="add_plate">Añadir Plato</string>
     <string name="persons_format">Personas: %d</string>
     <string name="paidOut_format">Cuenta pagada: %s</string>
     <string name="bill_format">Total cuenta: %d€</string>
+    <string name="bill_text">Cuenta de la</string>
+    <string name="table_text">Cuenta de la MESA 1</string>
+    <string name="net_bill_text">Cuenta Neta:</string>
+    <string name="tax_bill_text">IVA 10 % :</string>
+    <string name="total_bill_text">Total Cuenta:</string>
+    <string name="net_bill_value">100</string>
+    <string name="tax_bill_value">10</string>
+    <string name="total_bill_value">110</string>
+    <string name="bill_paid_text">Cuenta Pagada:</string>
+    <string name="no_paid_text">NO</string>
+    <string name="paid_text">SI</string>
 </resources>
