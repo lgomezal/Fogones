@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Fogones</string>
+    <string name="table_image_description">Imagen de la mesa</string>
+    <string name="add_plate">Añadir Plato</string>
+    <string name="persons_format">Personas: %d</string>
+    <string name="paidOut_format">Cuenta pagada: %s</string>
+    <string name="bill_format">Total cuenta: %d€</string>
+</resources>
