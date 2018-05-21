@@ -1,7 +1,10 @@
 package com.codigohifi.fogones
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_tables.*
 
 class TableActivity : AppCompatActivity() {
@@ -36,6 +39,23 @@ class TableActivity : AppCompatActivity() {
                 null)
 
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.table_activity, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menu_show_bill -> {
+                // Lanzamos la pantalla de la cuenta
+                startActivity(BillActivity.intent(this))
+
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

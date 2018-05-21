@@ -96,14 +96,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            tools:text="@string/no_paid_text" />
+            android:text="@string/no_paid_text" />
 
         <RadioButton
             android:id="@+id/paid_rb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            tools:text="@string/paid_text" />
+            android:text="@string/paid_text" />
     </RadioGroup>
 
     <Button

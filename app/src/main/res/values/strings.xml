@@ -16,4 +16,5 @@
     <string name="bill_paid_text">Cuenta Pagada:</string>
     <string name="no_paid_text">NO</string>
     <string name="paid_text">SI</string>
+    <string name="bill">Cuenta</string>
 </resources>
