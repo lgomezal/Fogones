@@ -4,12 +4,12 @@
     <string name="add_plate">Añadir Plato</string>
     <string name="persons_format">Personas: %d</string>
     <string name="paidOut_format">Cuenta pagada: %s</string>
-    <string name="bill_format">Total cuenta: %d€</string>
-    <string name="bill_text">Cuenta de la</string>
+    <string name="bill_format">Cuenta sin IVA: %.2f €</string>
+    <string name="bill_text">Cuenta de la %s</string>
     <string name="table_text">Cuenta de la MESA 1</string>
-    <string name="net_bill_text">Cuenta Neta:</string>
-    <string name="tax_bill_text">IVA 10 % :</string>
-    <string name="total_bill_text">Total Cuenta:</string>
+    <string name="net_bill_text">Cuenta Neta: %.2f €</string>
+    <string name="tax_bill_text">IVA 10 %% : %.2f €</string>
+    <string name="total_bill_text">Total Cuenta: %.2f €</string>
     <string name="net_bill_value">100</string>
     <string name="tax_bill_value">10</string>
     <string name="total_bill_value">110</string>

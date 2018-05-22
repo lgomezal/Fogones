@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/default_activity_padding"
-    tools:context=".TableActivity">
+    tools:context=".TableFragment">
 
 
     <ImageView
@@ -41,16 +41,14 @@
             tools:text="Personas: 4" />
 
         <TextView
-            android:id="@+id/paidOut"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="Cuenta pagada: NO" />
-
-        <TextView
-            android:id="@+id/bill"
+            android:id="@+id/billText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Total cuenta: 100 €" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/addPlate"
