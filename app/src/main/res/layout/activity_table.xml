@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/default_activity_padding"
-    tools:context=".TableActivity">
+    tools:context=".activity.TableActivity">
 
 
     <fragment
         android:id="@+id/table_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.codigohifi.fogones.TableFragment"/>
+        android:name="com.codigohifi.fogones.fragment.TableFragment"/>
 
 
 </FrameLayout>

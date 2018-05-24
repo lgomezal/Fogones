@@ -1,11 +1,8 @@
-package com.codigohifi.fogones
+package com.codigohifi.fogones.activity
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_table.*
+import com.codigohifi.fogones.R
 
 class TableActivity : AppCompatActivity() {
 
