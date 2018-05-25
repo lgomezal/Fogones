@@ -22,4 +22,8 @@ class Tables {
 
     fun getTable(index: Int) = tables[index]
 
+    operator fun get(index: Int) = tables[index]
+
+    fun toArray() = tables.toTypedArray()
+
 }

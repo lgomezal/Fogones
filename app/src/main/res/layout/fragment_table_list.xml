@@ -3,13 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.TableActivity">
+    tools:context=".fragment.TableListFragment">
 
-
-    <FrameLayout
-        android:id="@+id/table_list_fragment"
+    <ListView
+        android:id="@+id/table_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
 
 </FrameLayout>
