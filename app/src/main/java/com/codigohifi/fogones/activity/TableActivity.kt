@@ -4,8 +4,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.codigohifi.fogones.R
 import com.codigohifi.fogones.fragment.TableListFragment
+import com.codigohifi.fogones.model.Table
 
-class TableActivity : AppCompatActivity() {
+class TableActivity : AppCompatActivity(), TableListFragment.OnTableSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +23,11 @@ class TableActivity : AppCompatActivity() {
                     .commit()
         }
 
+    }
+
+    override fun onTableSelected(table: Table, position: Int) {
+        val intent = TablePagerActivity.intent(this, position)
+        startActivity(intent)
     }
 
 }

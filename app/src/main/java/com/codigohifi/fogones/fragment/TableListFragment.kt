@@ -1,6 +1,8 @@
 package com.codigohifi.fogones.fragment
 
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -27,6 +29,8 @@ class TableListFragment : Fragment() {
 
     }
 
+    private var onTableSelectedListener: OnTableSelectedListener? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -44,6 +48,40 @@ class TableListFragment : Fragment() {
                 tables.toArray())
 
         table_list.adapter = adapter
+
+        table_list.setOnItemClickListener { _, _, position, _ ->
+            // Avisamos al listener que una mesa ha sido seleccionada
+            onTableSelectedListener?.onTableSelected(tables[position], position)
+        }
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        commonAttach(context as Activity)
+    }
+
+    override fun onAttach(activity: Activity?) {
+        super.onAttach(activity)
+        commonAttach(activity as Activity)
+    }
+
+    private fun commonAttach(activity: Activity) {
+        if (activity is OnTableSelectedListener) {
+            onTableSelectedListener = activity
+        }
+        else {
+            onTableSelectedListener = null
+        }
+
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        onTableSelectedListener = null
+    }
+
+    interface OnTableSelectedListener {
+        fun onTableSelected(table: Table, position: Int)
     }
 
 
