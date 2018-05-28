@@ -2,7 +2,7 @@ package com.codigohifi.fogones.model
 
 import com.codigohifi.fogones.R
 
-class Tables {
+object Tables {
 
     private val tables: List<Table> = listOf(
             Table(0,"MESA 1", 4, R.drawable.tableimage, null),

@@ -40,18 +40,16 @@ class TableListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val tables = Tables()
-
         val adapter = ArrayAdapter<Table>(
                 activity,
                 android.R.layout.simple_list_item_1,
-                tables.toArray())
+                Tables.toArray())
 
         table_list.adapter = adapter
 
         table_list.setOnItemClickListener { _, _, position, _ ->
             // Avisamos al listener que una mesa ha sido seleccionada
-            onTableSelectedListener?.onTableSelected(tables[position], position)
+            onTableSelectedListener?.onTableSelected(Tables[position], position)
         }
     }
 
