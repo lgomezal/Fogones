@@ -6,6 +6,7 @@ import android.view.*
 import com.codigohifi.fogones.R
 import com.codigohifi.fogones.model.Table
 import com.codigohifi.fogones.activity.BillActivity
+import kotlinx.android.synthetic.main.content_table.*
 import kotlinx.android.synthetic.main.fragment_table.*
 
 class TableFragment: Fragment() {
@@ -29,6 +30,10 @@ class TableFragment: Fragment() {
             return fragment
         }
 
+    }
+
+    private enum class VIEW_INDEX(val index: Int) {
+        LOADING(0), TABLE(1)
     }
 
     var table: Table? = null
@@ -58,11 +63,19 @@ class TableFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (arguments != null) {
+        // Configuramos las animaciones para el viewSwitcher
+        view_switcher.setInAnimation(activity, android.R.anim.fade_in)
+        view_switcher.setOutAnimation(activity, android.R.anim.fade_out)
 
-            table = arguments!!.getSerializable(ARG_TABLE) as Table
+        // Le decimos al viewSwitcher que muestre la primera vista
+        view_switcher.displayedChild = VIEW_INDEX.LOADING.index
 
-        }
+        view.postDelayed({
+            if (arguments != null) {
+                table = arguments!!.getSerializable(ARG_TABLE) as Table
+            }
+            view_switcher.displayedChild = VIEW_INDEX.TABLE.index
+        }, resources.getInteger(R.integer.default_fake_delay).toLong())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
