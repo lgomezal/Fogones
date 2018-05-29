@@ -41,8 +41,17 @@ class TableActivity : AppCompatActivity(), TableListFragment.OnTableSelectedList
     }
 
     override fun onTableSelected(table: Table, position: Int) {
-        val intent = TablePagerActivity.intent(this, position)
-        startActivity(intent)
+        val tablePagerFragment = supportFragmentManager.findFragmentById(R.id.view_pager_fragment) as? TablePagerFragment
+
+        if (tablePagerFragment != null) {
+            // Estamos en una interfaz donde existe TablePagerFragment, le decimos que nos mueva a una mesa
+            tablePagerFragment.moveToTable(position)
+        }
+        else {
+            val intent = TablePagerActivity.intent(this, position)
+            startActivity(intent)
+        }
+
     }
 
 }

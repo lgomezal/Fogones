@@ -87,7 +87,7 @@ class TablePagerFragment: Fragment() {
         }
     }
 
-    private fun moveToTable(position: Int) {
+    fun moveToTable(position: Int) {
         view_pager.currentItem = position
     }
 
