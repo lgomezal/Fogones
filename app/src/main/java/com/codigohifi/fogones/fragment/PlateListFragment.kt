@@ -3,18 +3,19 @@ package com.codigohifi.fogones.fragment
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.support.design.R.id.container
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.codigohifi.fogones.R
+import com.codigohifi.fogones.adapter.PlateRecyclerViewAdapter
 import com.codigohifi.fogones.model.Plate
 import com.codigohifi.fogones.model.Plates
-import com.codigohifi.fogones.model.Table
-import com.codigohifi.fogones.model.Tables
 import kotlinx.android.synthetic.main.fragment_plate_list.*
-import kotlinx.android.synthetic.main.fragment_table_list.*
 
 class PlateListFragment: Fragment() {
 
@@ -26,6 +27,13 @@ class PlateListFragment: Fragment() {
 
     private var onPlateSelectedListener: OnPlateSelectedListener? = null
 
+    var plates: List<Plate>? = null
+        set(value) {
+            if (value != null) {
+                plate_list.adapter = PlateRecyclerViewAdapter(value)
+            }
+        }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -35,17 +43,16 @@ class PlateListFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = ArrayAdapter<Plate>(
-                activity,
-                android.R.layout.simple_list_item_1,
-                Plates.toArray())
+        // Configuramos el RecyclerView
+        // Primero decimos como se visualizan sus elementos
+        plate_list.layoutManager = LinearLayoutManager(activity)
 
-        plate_list.adapter = adapter
+        // Le decimos quién es el que anima el RecyclerView
+        plate_list.itemAnimator = DefaultItemAnimator()
 
-        plate_list.setOnItemClickListener { _, _, position, _ ->
-            // Avisamos al listener que un plato ha sido seleccionado
-            onPlateSelectedListener?.onPlateSelected(Plates[position], position)
-        }
+        val arrayPlates = Plates.toArray()
+        plates = arrayPlates.toList()
+
     }
 
     override fun onAttach(context: Context?) {

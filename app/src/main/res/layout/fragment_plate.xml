@@ -1,0 +1,63 @@
+<android.support.v7.widget.CardView android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="16dp"
+    android:layout_margin="8dp"
+    app:cardElevation="8dp">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_activity_padding"
+        tools:context=".fragment.TableFragment">
+
+
+        <ImageView
+            android:id="@+id/plate_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/plate_image_description"
+            tools:src="@drawable/plato0" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/plate_image"
+            android:layout_toEndOf="@+id/plate_image"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/plate_image"
+            android:layout_marginLeft="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/plate_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Entrante" />
+
+            <TextView
+                android:id="@+id/plate_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Precio: 10 €" />
+
+            <TextView
+                android:id="@+id/plate_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Rollitos de salmón con queso Philadelphia" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
