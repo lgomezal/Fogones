@@ -10,8 +10,15 @@ import com.codigohifi.fogones.R
 import com.codigohifi.fogones.model.Plate
 
 class PlateRecyclerViewAdapter(private val plates: List<Plate>): RecyclerView.Adapter<PlateRecyclerViewAdapter.PlateViewHolder>() {
+
+    var onClickListener: View.OnClickListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlateViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_plate, parent, false)
+
+        // Le decimos a este view que cuando lo pulsen avise a nuestro onClickListener
+        view.setOnClickListener(onClickListener)
+
         return PlateViewHolder(view)
     }
 

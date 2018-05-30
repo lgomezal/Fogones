@@ -19,8 +19,9 @@
         <activity android:name=".activity.BillActivity" />
         <activity
             android:name=".activity.TablePagerActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".activity.PlateListActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.PlateListActivity" />
+        <activity android:name=".activity.DetailPlateActivity"></activity>
     </application>
 
 </manifest>

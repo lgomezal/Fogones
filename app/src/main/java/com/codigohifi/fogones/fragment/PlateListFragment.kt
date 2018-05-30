@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.support.design.R.id.container
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.codigohifi.fogones.R
+import com.codigohifi.fogones.activity.DetailPlateActivity
 import com.codigohifi.fogones.adapter.PlateRecyclerViewAdapter
 import com.codigohifi.fogones.model.Plate
 import com.codigohifi.fogones.model.Plates
@@ -25,12 +27,19 @@ class PlateListFragment: Fragment() {
 
     }
 
-    private var onPlateSelectedListener: OnPlateSelectedListener? = null
-
     var plates: List<Plate>? = null
         set(value) {
             if (value != null) {
-                plate_list.adapter = PlateRecyclerViewAdapter(value)
+                val adapter = PlateRecyclerViewAdapter(value)
+                // Si alguien pulsa una elemento, nos queremos enterar
+                adapter.onClickListener = View.OnClickListener {
+                    //Alguien ha pulsado un elemento del RecyclerView
+                    val plateIndex = plate_list.getChildAdapterPosition(it)
+
+                    startActivity(DetailPlateActivity.intent(activity!!, plateIndex))
+                }
+
+                plate_list.adapter = adapter
             }
         }
 
@@ -43,45 +52,17 @@ class PlateListFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Cargamos los valores fake de Plates
+        val arrayPlates = Plates.toArray()
+        plates = arrayPlates.toList()
+
         // Configuramos el RecyclerView
         // Primero decimos como se visualizan sus elementos
-        plate_list.layoutManager = LinearLayoutManager(activity)
+        plate_list.layoutManager = GridLayoutManager(activity, resources.getInteger(R.integer.plate_columns).toInt())
 
         // Le decimos quién es el que anima el RecyclerView
         plate_list.itemAnimator = DefaultItemAnimator()
 
-        val arrayPlates = Plates.toArray()
-        plates = arrayPlates.toList()
-
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        commonAttach(context as Activity)
-    }
-
-    override fun onAttach(activity: Activity?) {
-        super.onAttach(activity)
-        commonAttach(activity as Activity)
-    }
-
-    private fun commonAttach(activity: Activity) {
-        if (activity is OnPlateSelectedListener) {
-            onPlateSelectedListener = activity
-        }
-        else {
-            onPlateSelectedListener = null
-        }
-
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        onPlateSelectedListener = null
-    }
-
-    interface OnPlateSelectedListener {
-        fun onPlateSelected(table: Plate, position: Int)
     }
 
 }
