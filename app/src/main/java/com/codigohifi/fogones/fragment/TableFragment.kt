@@ -1,15 +1,18 @@
 package com.codigohifi.fogones.fragment
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
+import android.widget.Button
 import com.codigohifi.fogones.R
 import com.codigohifi.fogones.model.Table
 import com.codigohifi.fogones.activity.BillActivity
 import kotlinx.android.synthetic.main.content_table.*
 import kotlinx.android.synthetic.main.fragment_table.*
 
-class TableFragment: Fragment() {
+class TableFragment: Fragment(), View.OnClickListener {
 
     companion object {
 
@@ -32,6 +35,11 @@ class TableFragment: Fragment() {
 
     }
 
+    lateinit var root: View
+    val button by lazy { root.findViewById<Button>(R.id.addPlate) }
+
+    private var onAddButtonClickedListener: OnAddButtonClickedListener? = null
+
     private enum class VIEW_INDEX(val index: Int) {
         LOADING(0), TABLE(1)
     }
@@ -39,11 +47,11 @@ class TableFragment: Fragment() {
     var table: Table? = null
         set(value) {
             if (value != null) {
-                table_image.setImageResource(value.icon)
-                table_description.text = value.description
-                persons.text = getString(R.string.persons_format, value.persons)
+                table_image?.setImageResource(value.icon)
+                table_description?.text = value.description
+                persons?.text = getString(R.string.persons_format, value.persons)
                 // TODO sumar del listview los importes de los platos que llevan elegidos
-                billText.text = getString(R.string.bill_format, 145.75F)
+                billText?.text = getString(R.string.bill_format, 145.75F)
             }
         }
 
@@ -51,12 +59,17 @@ class TableFragment: Fragment() {
         super.onCreate(savedInstanceState)
 
         setHasOptionsMenu(true)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_table, container, false)
 
+        root = inflater.inflate(R.layout.fragment_table, container, false)
+
+        button.setOnClickListener(this)
+
+        return root
 
     }
 
@@ -74,7 +87,7 @@ class TableFragment: Fragment() {
             if (arguments != null) {
                 table = arguments!!.getSerializable(ARG_TABLE) as Table
             }
-            view_switcher.displayedChild = VIEW_INDEX.TABLE.index
+            view_switcher?.displayedChild = VIEW_INDEX.TABLE.index
         }, resources.getInteger(R.integer.default_fake_delay).toLong())
     }
 
@@ -96,6 +109,43 @@ class TableFragment: Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        commonAttach(context as? Activity)
+    }
+
+    override fun onAttach(activity: Activity?) {
+        super.onAttach(activity)
+        commonAttach(activity)
+    }
+
+    fun commonAttach(activity: Activity?) {
+        if (activity is OnAddButtonClickedListener) {
+            onAddButtonClickedListener = activity
+        }
+        else {
+            onAddButtonClickedListener = null
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        onAddButtonClickedListener = null
+    }
+
+    interface OnAddButtonClickedListener {
+        fun onAddButtonClicked()
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.addPlate -> {
+                onAddButtonClickedListener?.onAddButtonClicked()
+            }
+        }
 
     }
 

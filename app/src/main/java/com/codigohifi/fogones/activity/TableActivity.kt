@@ -2,20 +2,23 @@ package com.codigohifi.fogones.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.view.ViewGroup
 import com.codigohifi.fogones.R
+import com.codigohifi.fogones.fragment.PlateListFragment
+import com.codigohifi.fogones.fragment.TableFragment
 import com.codigohifi.fogones.fragment.TableListFragment
 import com.codigohifi.fogones.fragment.TablePagerFragment
 import com.codigohifi.fogones.model.Table
 
-class TableActivity : AppCompatActivity(), TableListFragment.OnTableSelectedListener {
+class TableActivity : AppCompatActivity(), TableListFragment.OnTableSelectedListener, TableFragment.OnAddButtonClickedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_table)
 
         // Averiguamos que interfaz hemos cargado
-        // Eso lo averiguamos preguntando si en la interfaz tenemos un Framlayout concreto
+        // Eso lo averiguamos preguntando si en la interfaz tenemos un Framelayout concreto
         if (findViewById<ViewGroup>(R.id.table_list_fragment) != null) {
             // Hemos cargado una interfaz que tiene hueco para el fragment TableListFragment
             // Comprobamos primero que no tenemos ya añadido el fragment a nuestra jerarquía
@@ -49,6 +52,16 @@ class TableActivity : AppCompatActivity(), TableListFragment.OnTableSelectedList
         }
         else {
             val intent = TablePagerActivity.intent(this, position)
+            startActivity(intent)
+        }
+
+    }
+
+    override fun onAddButtonClicked() {
+        val plateListFragment = supportFragmentManager.findFragmentById(R.id.plate_list_fragment) as? PlateListFragment
+
+        if (plateListFragment == null) {
+            val intent = PlateListActivity.intent(this)
             startActivity(intent)
         }
 
