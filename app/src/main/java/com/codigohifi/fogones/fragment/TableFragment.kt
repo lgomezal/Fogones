@@ -83,19 +83,9 @@ class TableFragment: Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        // Configuramos las animaciones para el viewSwitcher
-//        view_switcher.setInAnimation(activity, android.R.anim.fade_in)
-//        view_switcher.setOutAnimation(activity, android.R.anim.fade_out)
-//
-//        // Le decimos al viewSwitcher que muestre la primera vista
-//        view_switcher.displayedChild = VIEW_INDEX.LOADING.index
-//
-//        view.postDelayed({
-            if (arguments != null) {
-                table = arguments!!.getSerializable(ARG_TABLE) as Table
-            }
-//            view_switcher?.displayedChild = VIEW_INDEX.TABLE.index
-//        }, resources.getInteger(R.integer.default_fake_delay).toLong())
+        if (arguments != null) {
+            table = arguments!!.getSerializable(ARG_TABLE) as Table
+        }
     }
 
     override fun onAttach(context: Context?) {

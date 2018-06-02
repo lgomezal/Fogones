@@ -1,5 +1,6 @@
 package com.codigohifi.fogones.activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -9,9 +10,12 @@ import com.codigohifi.fogones.R
 import com.codigohifi.fogones.fragment.PlateListFragment
 import com.codigohifi.fogones.fragment.TableFragment
 import com.codigohifi.fogones.fragment.TablePagerFragment
+import com.codigohifi.fogones.model.Table
 import kotlinx.android.synthetic.main.activity_table_pager.*
 
-class TablePagerActivity : AppCompatActivity() {
+class TablePagerActivity : AppCompatActivity(), TableFragment.OnAddButtonClickedListener {
+
+    val PLATE_SELECTED_REQUEST = 1
 
     companion object {
 
@@ -53,6 +57,32 @@ class TablePagerActivity : AppCompatActivity() {
             true
         }
         else -> super.onOptionsItemSelected(item)
+    }
+
+    override fun onAddButtonClicked(table: Table) {
+        val tableIndex = table.tableNumber
+        val plateListFragment = supportFragmentManager.findFragmentById(R.id.plate_list_fragment) as? PlateListFragment
+        if (plateListFragment == null) {
+            val intent = PlateListActivity.intent(this, tableIndex)
+            startActivityForResult(intent, PLATE_SELECTED_REQUEST)
+        }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PLATE_SELECTED_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                val tableIndex = data?.extras?.getInt(DetailPlateActivity.EXTRA_TABLE_INDEX)
+                if (tableIndex != null) {
+                    val tablePagerFragment = supportFragmentManager.findFragmentById(R.id.view_pager_fragment) as? TablePagerFragment
+                    if (tablePagerFragment != null) {
+                        // Estamos en una interfaz donde existe TablePagerFragment, le decimos que nos mueva a una mesa
+                        tablePagerFragment.moveToTable(tableIndex)
+                    }
+                }
+            }
+        }
     }
 
 }

@@ -29,6 +29,8 @@ class PlateListActivity : AppCompatActivity(), PlateListFragment.OnRecyclerViewC
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plate_list)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val tableIndex:Int = intent.getIntExtra(PlateListActivity.EXTRA_TABLE, 0)
 
         // Creo si hace falta el PlateListFragment
@@ -55,7 +57,6 @@ class PlateListActivity : AppCompatActivity(), PlateListFragment.OnRecyclerViewC
     override fun onRecyclerClicked(tableIndex: Int, plateIndex: Int) {
         val intent = DetailPlateActivity.intent(this, plateIndex, tableIndex)
         startActivityForResult(intent, PLATE_SELECTED_REQUEST)
-        //startActivity(intent)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -3,9 +3,11 @@ package com.codigohifi.fogones.activity
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
+import android.view.MenuItem
 import android.view.View
 import com.codigohifi.fogones.R
 import com.codigohifi.fogones.fragment.TableFragment
@@ -40,6 +42,8 @@ class DetailPlateActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_plate)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         addButton.setOnClickListener(this)
 
         // Sacamos los datos con los que configurar la interfaz
@@ -50,8 +54,12 @@ class DetailPlateActivity : AppCompatActivity(), View.OnClickListener {
         plate_image.setImageResource(plate.plateImage)
         plate_type.text = plate.typeOfPlate
         plate_price.text = getString(R.string.plate_price_format, plate.price)
-        plate_description.text = plate.description
-        plate_long_description.text = plate.largeDesc
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            plate_description.text = plate.largeDesc
+        } else {
+            plate_description.text = plate.description
+            plate_long_description.text = plate.largeDesc
+        }
 
         // Recorremos el array de los alérgenos
 
@@ -71,6 +79,15 @@ class DetailPlateActivity : AppCompatActivity(), View.OnClickListener {
                 index += 1
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
+        android.R.id.home -> {
+            // Nos han llamado a la flecha de back
+            finish()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     override fun onClick(v: View?) {
