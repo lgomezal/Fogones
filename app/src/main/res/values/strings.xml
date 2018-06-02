@@ -18,6 +18,8 @@
     <string name="paid_text">SI</string>
     <string name="bill">Cuenta</string>
     <string name="plate_price_format">Precio: %.2f €</string>
+    <string name="plate_list_description">%s %.2f €</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

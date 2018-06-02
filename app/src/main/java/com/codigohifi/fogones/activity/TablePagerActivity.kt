@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import com.codigohifi.fogones.R
+import com.codigohifi.fogones.fragment.PlateListFragment
+import com.codigohifi.fogones.fragment.TableFragment
 import com.codigohifi.fogones.fragment.TablePagerFragment
 import kotlinx.android.synthetic.main.activity_table_pager.*
 

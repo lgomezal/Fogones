@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="16dp"
     android:layout_margin="8dp"
-    app:cardElevation="8dp">
+    app:cardElevation="8dp"
+    android:id="@+id/table_card">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -33,6 +34,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignBottom="@+id/table_image"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:orientation="vertical">
 
             <TextView
@@ -42,16 +45,14 @@
                 tools:text="MESA 1" />
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
                 android:id="@+id/persons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="Personas: 4" />
-
-            <TextView
-                android:id="@+id/billText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="Total cuenta: 100 €" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -64,16 +65,6 @@
                 android:text="@string/add_plate" />
 
         </LinearLayout>
-
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/table_image" />
 
 
     </RelativeLayout>

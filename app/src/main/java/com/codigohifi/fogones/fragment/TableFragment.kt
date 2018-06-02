@@ -2,15 +2,24 @@ package com.codigohifi.fogones.fragment
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
+import android.widget.ArrayAdapter
 import android.widget.Button
 import com.codigohifi.fogones.R
 import com.codigohifi.fogones.model.Table
 import com.codigohifi.fogones.activity.BillActivity
+import com.codigohifi.fogones.activity.DetailPlateActivity
+import com.codigohifi.fogones.activity.DetailPlateActivity.Companion.EXTRA_PLATE_INDEX
+import com.codigohifi.fogones.model.Plate
+import com.codigohifi.fogones.model.Plates
+import com.codigohifi.fogones.model.Tables
 import kotlinx.android.synthetic.main.content_table.*
+import kotlinx.android.synthetic.main.content_table.view.*
 import kotlinx.android.synthetic.main.fragment_table.*
+import kotlinx.android.synthetic.main.fragment_table_list.*
 
 class TableFragment: Fragment(), View.OnClickListener {
 
@@ -50,8 +59,6 @@ class TableFragment: Fragment(), View.OnClickListener {
                 table_image?.setImageResource(value.icon)
                 table_description?.text = value.description
                 persons?.text = getString(R.string.persons_format, value.persons)
-                // TODO sumar del listview los importes de los platos que llevan elegidos
-                billText?.text = getString(R.string.bill_format, 145.75F)
             }
         }
 
@@ -76,40 +83,19 @@ class TableFragment: Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Configuramos las animaciones para el viewSwitcher
-        view_switcher.setInAnimation(activity, android.R.anim.fade_in)
-        view_switcher.setOutAnimation(activity, android.R.anim.fade_out)
-
-        // Le decimos al viewSwitcher que muestre la primera vista
-        view_switcher.displayedChild = VIEW_INDEX.LOADING.index
-
-        view.postDelayed({
+//        // Configuramos las animaciones para el viewSwitcher
+//        view_switcher.setInAnimation(activity, android.R.anim.fade_in)
+//        view_switcher.setOutAnimation(activity, android.R.anim.fade_out)
+//
+//        // Le decimos al viewSwitcher que muestre la primera vista
+//        view_switcher.displayedChild = VIEW_INDEX.LOADING.index
+//
+//        view.postDelayed({
             if (arguments != null) {
                 table = arguments!!.getSerializable(ARG_TABLE) as Table
             }
-            view_switcher?.displayedChild = VIEW_INDEX.TABLE.index
-        }, resources.getInteger(R.integer.default_fake_delay).toLong())
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.table_activity, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.menu_show_bill -> {
-
-                val description = table_description.text.toString()
-                val netBill: Float = 145.75F
-                // Lanzamos la pantalla de la cuenta
-                startActivity(BillActivity.intent( context!!, description, netBill))
-
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-
+//            view_switcher?.displayedChild = VIEW_INDEX.TABLE.index
+//        }, resources.getInteger(R.integer.default_fake_delay).toLong())
     }
 
     override fun onAttach(context: Context?) {
@@ -137,16 +123,14 @@ class TableFragment: Fragment(), View.OnClickListener {
     }
 
     interface OnAddButtonClickedListener {
-        fun onAddButtonClicked()
+        fun onAddButtonClicked(table: Table)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.addPlate -> {
-                onAddButtonClickedListener?.onAddButtonClicked()
+                onAddButtonClickedListener?.onAddButtonClicked(arguments!!.getSerializable(ARG_TABLE) as Table)
             }
         }
-
     }
-
 }

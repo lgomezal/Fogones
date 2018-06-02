@@ -2,6 +2,7 @@ package com.codigohifi.fogones.fragment
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.R.id.container
 import android.support.v4.app.Fragment
@@ -14,29 +15,50 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.codigohifi.fogones.R
 import com.codigohifi.fogones.activity.DetailPlateActivity
+import com.codigohifi.fogones.activity.TablePagerActivity
 import com.codigohifi.fogones.adapter.PlateRecyclerViewAdapter
 import com.codigohifi.fogones.model.Plate
 import com.codigohifi.fogones.model.Plates
+import com.codigohifi.fogones.model.Table
+import com.codigohifi.fogones.model.Tables
 import kotlinx.android.synthetic.main.fragment_plate_list.*
 
 class PlateListFragment: Fragment() {
 
+    private var onRecyclerViewClickedListener: OnRecyclerViewClickedListener? = null
+
     companion object {
-        @JvmStatic
-        fun newInstance() = PlateListFragment()
+
+        val ARG_TABLE = "ARG_TABLE"
+
+        fun newInstance(tableIndex: Int): PlateListFragment {
+            // Nos creamos nuestro fragment
+            val fragment = PlateListFragment()
+
+            // Nos creamos los argumentos al fragment
+            val arguments = Bundle()
+            arguments.putSerializable(ARG_TABLE, tableIndex)
+
+            // Asignamos los argumentos al fragment
+            fragment.arguments = arguments
+
+            // Devolvemos el fragment
+            return fragment
+        }
 
     }
 
     var plates: List<Plate>? = null
         set(value) {
             if (value != null) {
+                val tableIndex = arguments?.getInt(PlateListFragment.ARG_TABLE, 0)
                 val adapter = PlateRecyclerViewAdapter(value)
                 // Si alguien pulsa una elemento, nos queremos enterar
                 adapter.onClickListener = View.OnClickListener {
                     //Alguien ha pulsado un elemento del RecyclerView
                     val plateIndex = plate_list.getChildAdapterPosition(it)
 
-                    startActivity(DetailPlateActivity.intent(activity!!, plateIndex))
+                    onRecyclerViewClickedListener?.onRecyclerClicked(tableIndex!!, plateIndex)
                 }
 
                 plate_list.adapter = adapter
@@ -63,6 +85,34 @@ class PlateListFragment: Fragment() {
         // Le decimos quién es el que anima el RecyclerView
         plate_list.itemAnimator = DefaultItemAnimator()
 
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        commonAttach(context as? Activity)
+    }
+
+    override fun onAttach(activity: Activity?) {
+        super.onAttach(activity)
+        commonAttach(activity)
+    }
+
+    fun commonAttach(activity: Activity?) {
+        if (activity is OnRecyclerViewClickedListener) {
+            onRecyclerViewClickedListener = activity
+        }
+        else {
+            onRecyclerViewClickedListener = null
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        onRecyclerViewClickedListener = null
+    }
+
+    interface OnRecyclerViewClickedListener {
+        fun onRecyclerClicked(tableIndex: Int, plateIndex: Int)
     }
 
 }
