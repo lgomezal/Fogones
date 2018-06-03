@@ -2,25 +2,17 @@ package com.codigohifi.fogones.fragment
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.support.design.R.id.container
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import com.codigohifi.fogones.R
-import com.codigohifi.fogones.activity.DetailPlateActivity
-import com.codigohifi.fogones.activity.TablePagerActivity
 import com.codigohifi.fogones.adapter.PlateRecyclerViewAdapter
 import com.codigohifi.fogones.model.Plate
 import com.codigohifi.fogones.model.Plates
-import com.codigohifi.fogones.model.Table
-import com.codigohifi.fogones.model.Tables
 import kotlinx.android.synthetic.main.fragment_plate_list.*
 
 class PlateListFragment: Fragment() {

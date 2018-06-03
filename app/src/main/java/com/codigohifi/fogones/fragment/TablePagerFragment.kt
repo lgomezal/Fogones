@@ -1,11 +1,7 @@
 package com.codigohifi.fogones.fragment
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBar
@@ -14,12 +10,9 @@ import android.view.*
 import android.widget.ArrayAdapter
 import com.codigohifi.fogones.R
 import com.codigohifi.fogones.activity.BillActivity
-import com.codigohifi.fogones.activity.TablePagerActivity
 import com.codigohifi.fogones.model.Plate
-import com.codigohifi.fogones.model.Table
 import com.codigohifi.fogones.model.Tables
 import kotlinx.android.synthetic.main.content_table.*
-import kotlinx.android.synthetic.main.fragment_table.*
 import kotlinx.android.synthetic.main.fragment_table_pager.*
 
 class TablePagerFragment: Fragment() {

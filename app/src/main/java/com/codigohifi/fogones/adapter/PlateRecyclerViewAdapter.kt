@@ -29,11 +29,11 @@ class PlateRecyclerViewAdapter(private val plates: List<Plate>): RecyclerView.Ad
     }
 
     inner class PlateViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val plateImage = itemView.findViewById<ImageView?>(R.id.plate_image)
-        val plateType = itemView.findViewById<TextView?>(R.id.plate_type)
-        val platePrice = itemView.findViewById<TextView?>(R.id.plate_price)
-        val plateDescription = itemView.findViewById<TextView?>(R.id.plate_description)
-        val context = itemView.context
+        private val plateImage = itemView.findViewById<ImageView?>(R.id.plate_image)
+        private val plateType = itemView.findViewById<TextView?>(R.id.plate_type)
+        private val platePrice = itemView.findViewById<TextView?>(R.id.plate_price)
+        private val plateDescription = itemView.findViewById<TextView?>(R.id.plate_description)
+        private val context = itemView.context
 
         fun bindPlate(plate: Plate) {
             // Actualizamos la vista con el modelo

@@ -6,23 +6,14 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.MenuItem
-import android.view.View
 import com.codigohifi.fogones.R
-import com.codigohifi.fogones.fragment.TableFragment
-import com.codigohifi.fogones.fragment.TablePagerFragment
-import com.codigohifi.fogones.model.Plate
 import com.codigohifi.fogones.model.Plates
-import com.codigohifi.fogones.model.Table
 import com.codigohifi.fogones.model.Tables
 import kotlinx.android.synthetic.main.activity_detail_plate.*
-import kotlinx.android.synthetic.main.content_table.*
 import kotlinx.android.synthetic.main.fragment_plate.*
 
-class DetailPlateActivity : AppCompatActivity(), View.OnClickListener {
-
-    val PLATE_SELECTED_REQUEST = 1
+class DetailPlateActivity : AppCompatActivity() {
 
     companion object {
 
@@ -44,11 +35,21 @@ class DetailPlateActivity : AppCompatActivity(), View.OnClickListener {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        addButton.setOnClickListener(this)
+        addButton.setOnClickListener {
+            val table = Tables[intent.getIntExtra(EXTRA_TABLE_INDEX, 0)]
+            val plate = Plates[intent.getIntExtra(EXTRA_PLATE_INDEX, 0)]
+            val tableIndex = intent.getIntExtra(EXTRA_TABLE_INDEX, 0)
+            table.plates.add(plate)
+
+            val result = Intent()
+            result.putExtra(EXTRA_TABLE_INDEX, tableIndex)
+            setResult(Activity.RESULT_OK, result)
+
+            finish()
+        }
 
         // Sacamos los datos con los que configurar la interfaz
         val plate = Plates[intent.getIntExtra(EXTRA_PLATE_INDEX, 0)]
-        val table = Tables[intent.getIntExtra(EXTRA_TABLE_INDEX, 0)]
 
         // Actualizamos la interfaz
         plate_image.setImageResource(plate.plateImage)
@@ -89,23 +90,5 @@ class DetailPlateActivity : AppCompatActivity(), View.OnClickListener {
         }
         else -> super.onOptionsItemSelected(item)
     }
-
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.addButton -> {
-                val table = Tables[intent.getIntExtra(EXTRA_TABLE_INDEX, 0)]
-                val plate = Plates[intent.getIntExtra(EXTRA_PLATE_INDEX, 0)]
-                val tableIndex = intent.getIntExtra(EXTRA_TABLE_INDEX, 0)
-                table.plates.add(plate)
-
-                val result = Intent()
-                result.putExtra(EXTRA_TABLE_INDEX, tableIndex)
-                setResult(Activity.RESULT_OK, result)
-
-                finish()
-            }
-        }
-    }
-
 
 }

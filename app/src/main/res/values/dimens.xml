@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="default_activity_padding">16dp</dimen>
+    <dimen name="dp_0">0dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="sp_25">25sp</dimen>
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="sp_20">20sp</dimen>
 </resources>

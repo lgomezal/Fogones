@@ -15,16 +15,9 @@ import com.codigohifi.fogones.model.Table
 import com.codigohifi.fogones.model.Tables
 import kotlinx.android.synthetic.main.fragment_table_list.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TableListFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class TableListFragment : Fragment() {
 
     companion object {
-        @JvmStatic
         fun newInstance() = TableListFragment()
 
     }

@@ -2,26 +2,15 @@ package com.codigohifi.fogones.fragment
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
-import android.widget.ArrayAdapter
 import android.widget.Button
 import com.codigohifi.fogones.R
 import com.codigohifi.fogones.model.Table
-import com.codigohifi.fogones.activity.BillActivity
-import com.codigohifi.fogones.activity.DetailPlateActivity
-import com.codigohifi.fogones.activity.DetailPlateActivity.Companion.EXTRA_PLATE_INDEX
-import com.codigohifi.fogones.model.Plate
-import com.codigohifi.fogones.model.Plates
-import com.codigohifi.fogones.model.Tables
 import kotlinx.android.synthetic.main.content_table.*
-import kotlinx.android.synthetic.main.content_table.view.*
-import kotlinx.android.synthetic.main.fragment_table.*
-import kotlinx.android.synthetic.main.fragment_table_list.*
 
-class TableFragment: Fragment(), View.OnClickListener {
+class TableFragment: Fragment() {
 
     companion object {
 
@@ -74,7 +63,9 @@ class TableFragment: Fragment(), View.OnClickListener {
 
         root = inflater.inflate(R.layout.fragment_table, container, false)
 
-        button.setOnClickListener(this)
+        button.setOnClickListener {
+            onAddButtonClickedListener?.onAddButtonClicked(arguments!!.getSerializable(ARG_TABLE) as Table)
+        }
 
         return root
 
@@ -114,13 +105,5 @@ class TableFragment: Fragment(), View.OnClickListener {
 
     interface OnAddButtonClickedListener {
         fun onAddButtonClicked(table: Table)
-    }
-
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.addPlate -> {
-                onAddButtonClickedListener?.onAddButtonClicked(arguments!!.getSerializable(ARG_TABLE) as Table)
-            }
-        }
     }
 }

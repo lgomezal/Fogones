@@ -10,14 +10,11 @@ import com.codigohifi.fogones.fragment.PlateListFragment
 import com.codigohifi.fogones.fragment.TableFragment
 import com.codigohifi.fogones.fragment.TableListFragment
 import com.codigohifi.fogones.fragment.TablePagerFragment
-import com.codigohifi.fogones.model.Plate
 import com.codigohifi.fogones.model.Table
-import com.codigohifi.fogones.model.Tables
-import kotlinx.android.synthetic.main.fragment_table.*
 
 class TableActivity : AppCompatActivity(), TableListFragment.OnTableSelectedListener, TableFragment.OnAddButtonClickedListener {
 
-    val PLATE_SELECTED_REQUEST = 1
+    private val PLATE_SELECTED_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

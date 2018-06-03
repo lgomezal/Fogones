@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_table_pager.*
 
 class TablePagerActivity : AppCompatActivity(), TableFragment.OnAddButtonClickedListener {
 
-    val PLATE_SELECTED_REQUEST = 1
+    private val PLATE_SELECTED_REQUEST = 1
 
     companion object {
 

@@ -11,7 +11,7 @@ import com.codigohifi.fogones.fragment.PlateListFragment
 
 class PlateListActivity : AppCompatActivity(), PlateListFragment.OnRecyclerViewClickedListener {
 
-    val PLATE_SELECTED_REQUEST = 1
+    private val PLATE_SELECTED_REQUEST = 1
 
     companion object {
 

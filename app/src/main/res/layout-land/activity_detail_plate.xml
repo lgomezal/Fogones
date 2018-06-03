@@ -8,8 +8,6 @@
 
     <include layout="@layout/fragment_plate" />
 
-
-
     <ImageView
         android:id="@+id/alergen_0"
         android:layout_width="wrap_content"
@@ -81,10 +79,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_below="@id/alergen_0"
         android:layout_marginLeft="@dimen/dp_8"
         android:layout_marginRight="@dimen/dp_8"
-        android:layout_below="@+id/alergen_5"
-        android:layout_above="@+id/addButton"
         android:hint="@string/plate_observations"
         android:inputType="textMultiLine"
         tools:ignore="RtlCompat" />
@@ -93,8 +90,11 @@
         android:id="@+id/addButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/detail_cardView"
+        android:layout_above="@+id/editText"
+        android:layout_alignLeft="@id/alergen_5"
         android:text="@string/add_plate_button_text"
-        android:layout_alignParentBottom="true"/>
+        tools:ignore="UnknownId" />
 
 
 </RelativeLayout>
